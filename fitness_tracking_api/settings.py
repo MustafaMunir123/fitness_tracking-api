@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-sp601hmvxt#=tgmo$r2ov!)hz4hqfrsykhq^wwa1_fvbqsh^3r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'rest_auth',
     'allauth',
     'allauth.account',
@@ -113,6 +113,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

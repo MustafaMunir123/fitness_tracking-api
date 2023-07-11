@@ -1,0 +1,130 @@
+{
+    "FAT_LOSS": [
+    {
+        "name": "Running",
+        "burn_calories": 500,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "HIIT Workouts",
+        "burn_calories": 400,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Cycling",
+        "burn_calories": 350,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Jump Rope",
+        "burn_calories": 300,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Circuit Training",
+        "burn_calories": 450,
+        "sets": 3,
+        "reps": 15
+    }
+],
+    "muscle_building_exercises": [
+    {
+        "name": "Squats",
+        "burn_calories": 200,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Deadlifts",
+        "burn_calories": 250,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Bench Press",
+        "burn_calories": 220,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Pull-ups",
+        "burn_calories": 180,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Lunges",
+        "burn_calories": 150,
+        "sets": 3,
+        "reps": 15
+    }
+],
+    "cardio_exercises": [
+    {
+        "name": "Running",
+        "burn_calories": 500,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Swimming",
+        "burn_calories": 400,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Cycling",
+        "burn_calories": 350,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Jumping Jacks",
+        "burn_calories": 200,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "High-Intensity Aerobics",
+        "burn_calories": 300,
+        "sets": 3,
+        "reps": 15
+    }
+],
+    "flexibility_exercises": [
+    {
+        "name": "Yoga",
+        "burn_calories": 150,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Static Stretches",
+        "burn_calories": 50,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Pilates",
+        "burn_calories": 120,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Foam Rolling",
+        "burn_calories": 50,
+        "sets": 3,
+        "reps": 15
+    },
+    {
+        "name": "Tai Chi",
+        "burn_calories": 100,
+        "sets": 3,
+        "reps": 15
+    }
+]
+}

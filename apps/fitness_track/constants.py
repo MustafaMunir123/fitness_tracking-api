@@ -1,0 +1,11 @@
+FAT_LOSS = "FAT_LOSS"
+MUSCLE_BUILDING = "MUSCLE_BUILDING"
+CARDIO = "CARDIO"
+FLEXIBILITY = "FLEXIBILITY"
+
+EXERCISE_GOALS = (
+    (FAT_LOSS, "Fat Loss"),
+    (MUSCLE_BUILDING, "Muscle Building"),
+    (CARDIO, "Cardio"),
+    (FLEXIBILITY, "Flexibility")
+)
