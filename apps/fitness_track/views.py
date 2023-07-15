@@ -1,3 +1,4 @@
+import json
 from rest_auth.views import LoginView
 from rest_framework.views import APIView, status
 from rest_framework.permissions import IsAuthenticated
@@ -23,7 +24,7 @@ class LoginUserDetailView(LoginView):
 
 class UserDetailAPIView(APIView):
 
-    # authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     @staticmethod
@@ -39,5 +40,16 @@ class UserDetailAPIView(APIView):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return success_response(data=serializer.validated_data, status=status.HTTP_200_OK)
+        except Exception as ex:
+            raise ex
+
+
+class ExerciseAPIView(APIView):
+
+    def get(self, request):
+        try:
+            with open("apps/fitness_track/json/exercises.json") as file:
+                json_data = json.load(file)
+            return  success_response(data=json_data, status=status.HTTP_200_OK)
         except Exception as ex:
             raise ex

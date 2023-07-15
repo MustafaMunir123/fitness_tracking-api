@@ -29,6 +29,7 @@ class UserExercise(models.Model):
     reps = models.PositiveIntegerField(default=3, null=True, blank=False)
     last_attempted = models.DateField(editable=True, null=True, blank=True)
     done = models.BooleanField(default=False, blank=False, null=True)
+    focus = models.CharField(max_length=50, null=False, blank=True)
 
 
 class ExerciseHistory(models.Model):
