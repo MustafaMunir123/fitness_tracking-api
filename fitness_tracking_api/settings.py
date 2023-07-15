@@ -121,6 +121,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         # other authentication classes if needed
     ],
+    "EXCEPTION_HANDLER": "apps.utils.custom_exception_handler",
 }
 
 # Internationalization
