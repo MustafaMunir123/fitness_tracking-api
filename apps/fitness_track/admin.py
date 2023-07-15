@@ -4,12 +4,12 @@ from apps.fitness_track.models import (
     UserExercise,
     ExerciseHistory,
     Goal,
-    UserDetails
+    UserDetail
 )
 
 # Register your models here.
 admin.site.register(CustomUser)
-admin.site.register(UserDetails)
+admin.site.register(UserDetail)
 admin.site.register(UserExercise)
 admin.site.register(ExerciseHistory)
 admin.site.register(Goal)

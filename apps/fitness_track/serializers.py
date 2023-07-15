@@ -6,22 +6,24 @@ class CustomUserSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)
     email = serializers.EmailField(max_length=254)
     phone = serializers.CharField(max_length=13)
+    complete_details = serializers.BooleanField(default=True)
 
     def create(self, validated_data):
         return CustomUser.objects.create(**validated_data)
 
 
-class UserDetailsSerializer(serializers.Serializer):
+class UserDetailSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     height = serializers.FloatField()
     weight = serializers.FloatField()
     sleep = serializers.FloatField()
     walk = serializers.FloatField(allow_null=True)
+    user_id = serializers.IntegerField()
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
     exercises = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     def create(self, validated_data):
-        return UserDetails.objects.create(**validated_data)
-
+        return UserDetail.objects.create(**validated_data)
 
 class UserExerciseSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)

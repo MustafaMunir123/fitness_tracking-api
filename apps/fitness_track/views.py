@@ -1,9 +1,12 @@
 from rest_auth.views import LoginView
 from rest_framework.views import APIView, status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from apps.utils import success_response
 from apps.fitness_track.serializers import (
-    UserDetailsSerializer
+    UserDetailSerializer
 )
+
 
 class LoginUserDetailView(LoginView):
     def post(self, request, *args, **kwargs):
@@ -18,13 +21,19 @@ class LoginUserDetailView(LoginView):
         return response
 
 
-class UserDetailsAPIView(APIView):
+class UserDetailAPIView(APIView):
+
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     @staticmethod
     def get_serializer():
-        return UserDetailsSerializer
+        return UserDetailSerializer
 
     def post(self, request):
         try:
+            data = request.data
+            data.update({"user_id": request.user.id})
             serializer = self.get_serializer()
             serializer = serializer(data=request.data)
             serializer.is_valid(raise_exception=True)

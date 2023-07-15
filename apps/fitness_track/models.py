@@ -7,9 +7,10 @@ from apps.fitness_track.constants import EXERCISE_GOALS
 
 class CustomUser(AbstractUser):
     phone = models.CharField(max_length=13)
+    complete_details = models.BooleanField(default=True, blank=True)
 
 
-class UserDetails(models.Model):
+class UserDetail(models.Model):
     """
     user personal info
     """
@@ -17,7 +18,8 @@ class UserDetails(models.Model):
     weight = models.FloatField(null=False, blank=True)
     sleep = models.FloatField(null=False, blank=True)
     walk = models.FloatField(null=True, blank=True)
-    exercises = models.ManyToManyField('UserExercise', related_name='user_details')
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="user_detail")
+    exercises = models.ManyToManyField('UserExercise', related_name='user_detail')
 
 
 class UserExercise(models.Model):
