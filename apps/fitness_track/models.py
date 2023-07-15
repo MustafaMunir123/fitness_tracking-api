@@ -19,7 +19,6 @@ class UserDetail(models.Model):
     sleep = models.FloatField(null=False, blank=True)
     walk = models.FloatField(null=True, blank=True)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="user_detail")
-    exercises = models.ManyToManyField('UserExercise', related_name='user_detail')
 
 
 class UserExercise(models.Model):
@@ -30,6 +29,7 @@ class UserExercise(models.Model):
     last_attempted = models.DateField(editable=True, null=True, blank=True)
     done = models.BooleanField(default=False, blank=False, null=True)
     focus = models.CharField(max_length=50, null=False, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="user_exercise")
 
 
 class ExerciseHistory(models.Model):
