@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from apps.fitness_track.constants import EXERCISE_GOALS
@@ -18,6 +20,10 @@ class UserDetail(models.Model):
     weight = models.FloatField(null=False, blank=True)
     sleep = models.FloatField(null=False, blank=True)
     walk = models.FloatField(null=True, blank=True)
+    ini_height = models.FloatField(null=False, blank=True)
+    ini_weight = models.FloatField(null=False, blank=True)
+    ini_sleep = models.FloatField(null=False, blank=True)
+    ini_walk = models.FloatField(null=True, blank=True)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="user_detail")
 
 
@@ -26,7 +32,7 @@ class UserExercise(models.Model):
     burn_calories = models.PositiveIntegerField(null=False, blank=True)
     sets = models.PositiveIntegerField(default=3, null=True, blank=False)
     reps = models.PositiveIntegerField(default=3, null=True, blank=False)
-    last_attempted = models.DateField(editable=True, null=True, blank=True)
+    last_attempt = models.DateField(blank=True, null=True)
     done = models.BooleanField(default=False, blank=False, null=True)
     focus = models.CharField(max_length=50, null=False, blank=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="user_exercise")

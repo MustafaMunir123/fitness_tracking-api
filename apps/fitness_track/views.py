@@ -3,6 +3,7 @@ from rest_auth.views import LoginView
 from rest_framework.views import APIView, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from apps.fitness_track.services import UserDetailServices
 from apps.utils import success_response
 from apps.fitness_track.models import (
     UserExercise
@@ -38,6 +39,7 @@ class UserDetailAPIView(APIView):
     def post(self, request):
         try:
             data = request.data
+            UserDetailServices.copy_to_initial_data(request.data)
             data.update({"user_id": request.user.id})
             serializer = self.get_serializer()
             serializer = serializer(data=request.data)
@@ -60,6 +62,10 @@ class ExerciseAPIView(APIView):
 
 
 class UserExerciseAPIView(APIView):
+
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     @staticmethod
     def get_serializer():
         return UserExerciseSerializer
@@ -71,5 +77,20 @@ class UserExerciseAPIView(APIView):
             serializer = serializer(user_ex, many=True)
 
             return success_response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as ex:
+            raise ex
+
+    def post(self, request):
+        try:
+            if UserExercise.objects.filter(user_id=request.user.id, exercise_name=request.data["exercise_name"]).exists():
+                raise ValueError("Exercise already exists")
+            request.data.update({"user_id": request.user.id})
+            print(request.data)
+            serializer = self.get_serializer()
+            serializer = serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+
+            return success_response(data=serializer.validated_data, status=status.HTTP_200_OK)
         except Exception as ex:
             raise ex

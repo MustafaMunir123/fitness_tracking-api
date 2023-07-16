@@ -18,6 +18,10 @@ class UserDetailSerializer(serializers.Serializer):
     weight = serializers.FloatField()
     sleep = serializers.FloatField()
     walk = serializers.FloatField(allow_null=True)
+    ini_height = serializers.FloatField()
+    ini_weight = serializers.FloatField()
+    ini_sleep = serializers.FloatField()
+    ini_walk = serializers.FloatField(allow_null=True)
     user_id = serializers.IntegerField()
     user = serializers.PrimaryKeyRelatedField(read_only=True)
     exercises = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
@@ -25,13 +29,15 @@ class UserDetailSerializer(serializers.Serializer):
     def create(self, validated_data):
         return UserDetail.objects.create(**validated_data)
 
+
 class UserExerciseSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
+    user_id = serializers.IntegerField()
     exercise_name = serializers.CharField(max_length=50)
     burn_calories = serializers.IntegerField()
     sets = serializers.IntegerField(default=3)
     reps = serializers.IntegerField(default=3)
-    last_attempted = serializers.DateField(allow_null=True)
+    # last_attempt = serializers.CharField(allow_null=True, max_length=40, allow_blank=True)
     done = serializers.BooleanField(default=False)
 
     def create(self, validated_data):
