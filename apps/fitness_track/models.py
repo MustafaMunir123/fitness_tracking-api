@@ -11,6 +11,9 @@ class CustomUser(AbstractUser):
     phone = models.CharField(max_length=13)
     complete_details = models.BooleanField(default=True, blank=True)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class UserDetail(models.Model):
     """
@@ -26,6 +29,9 @@ class UserDetail(models.Model):
     ini_walk = models.FloatField(null=True, blank=True)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="user_detail")
 
+    def __str__(self):
+        return f"{self.user.username} {self.ini_height}"
+
 
 class UserExercise(models.Model):
     exercise_name = models.CharField(max_length=50, null=False, blank=True)
@@ -37,15 +43,24 @@ class UserExercise(models.Model):
     focus = models.CharField(max_length=50, null=False, blank=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="user_exercise")
 
+    def __str__(self):
+        return f"{self.user.username} \t{self.exercise_name}"
+
 
 class ExerciseHistory(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='exercise_history')
     exercise = models.ForeignKey(UserExercise, on_delete=models.CASCADE, related_name='exercise_history')
     date = models.DateField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.user.username} \t{self.exercise} \t {self.date}"
+
 
 class Goal(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='goal')
     category = models.CharField(choices=EXERCISE_GOALS, null=False, blank=True, max_length=50)
+
+    def __str__(self):
+        return f"{self.user.username} {self.category}"
 
 
