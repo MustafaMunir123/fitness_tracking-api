@@ -1,0 +1,30 @@
+[
+  {
+    "model": "fitness_track.goal",
+    "pk": 1,
+    "fields": {
+      "category": "Fat Loss"
+    }
+  },
+  {
+    "model": "fitness_track.goal",
+    "pk": 2,
+    "fields": {
+      "category": "Muscle Building"
+    }
+  },
+  {
+    "model": "fitness_track.goal",
+    "pk": 3,
+    "fields": {
+      "category": "Cardio"
+    }
+  },
+  {
+    "model": "fitness_track.goal",
+    "pk": 4,
+    "fields": {
+      "category": "Flexibility"
+    }
+  }
+]

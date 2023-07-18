@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
     complete_details = models.BooleanField(default=True, blank=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name} {self.username}"
 
 
 class UserDetail(models.Model):
@@ -57,10 +57,10 @@ class ExerciseHistory(models.Model):
 
 
 class Goal(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='goal')
-    category = models.CharField(choices=EXERCISE_GOALS, null=False, blank=True, max_length=50)
+    category = models.CharField(null=False, blank=True, max_length=50)
 
     def __str__(self):
-        return f"{self.user.username} {self.category}"
+        return f"{self.category}"
 
 
+# python manage.py loaddata goals.json

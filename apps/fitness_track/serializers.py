@@ -61,3 +61,7 @@ class GoalSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         return Goal.objects.create(**validated_data)
+
+    # def update(self, instance, validated_data):
+    #     event = Goal.objects.filter(id=instance.id).update(**validated_data)
+    #     return event

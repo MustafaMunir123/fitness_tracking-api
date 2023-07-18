@@ -4,13 +4,19 @@ from rest_framework.views import APIView, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from apps.fitness_track.services import UserDetailServices
+from apps.custom_permissions import (
+    TokenAuthenticationNotGET,
+    IsAuthenticatedNotGET
+)
 from apps.utils import success_response
 from apps.fitness_track.models import (
-    UserExercise
+    UserExercise,
+    Goal
 )
 from apps.fitness_track.serializers import (
     UserDetailSerializer,
-    UserExerciseSerializer
+    UserExerciseSerializer,
+    GoalSerializer
 )
 
 
@@ -88,9 +94,44 @@ class UserExerciseAPIView(APIView):
             print(request.data)
             serializer = self.get_serializer()
             serializer = serializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
             serializer.save()
 
             return success_response(data=serializer.validated_data, status=status.HTTP_200_OK)
+        except Exception as ex:
+            raise ex
+
+
+class UserGoals(APIView):
+
+    authentication_classes = [TokenAuthenticationNotGET]
+    permission_classes = [IsAuthenticatedNotGET]
+
+    @staticmethod
+    def get_serializer():
+        return GoalSerializer
+
+    # def post(self, request):
+    #     user = request.user.id
+    #
+    #     serializer = self
+
+    def get(self, request):
+        try:
+            goals = Goal.objects.all()
+            public_session = True
+
+            if str(request.user) != "AnonymousUser":
+                user = request.user.id
+                goals = Goal.objects.filter(user_id=user)
+                public_session = False
+
+            serializer = self.get_serializer()
+            serializer = serializer(goals, many=True)
+
+            message = {
+                "public_session": public_session,
+                "goals": serializer.data
+            }
+            return success_response(data=message, status=status.HTTP_200_OK)
         except Exception as ex:
             raise ex
