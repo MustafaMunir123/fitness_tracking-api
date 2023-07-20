@@ -58,9 +58,9 @@ class UserExerciseSerializer(serializers.Serializer):
 
 class ExerciseHistorySerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    user = serializers.PrimaryKeyRelatedField(read_only=True)
-    exercise = serializers.PrimaryKeyRelatedField(read_only=True)
-    date = serializers.DateField()
+    user_id = serializers.IntegerField()
+    exercise_id = serializers.IntegerField()
+    done = serializers.BooleanField(read_only=True)
 
     def create(self, validated_data):
         return ExerciseHistory.objects.create(**validated_data)

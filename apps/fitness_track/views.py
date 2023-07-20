@@ -21,7 +21,8 @@ from apps.fitness_track.models import (
 from apps.fitness_track.serializers import (
     UserDetailSerializer,
     UserExerciseSerializer,
-    GoalSerializer
+    GoalSerializer,
+    ExerciseHistorySerializer
 )
 
 
@@ -162,6 +163,9 @@ class UserGoals(APIView):
 
 class DashBoardAPIView(APIView):
 
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         try:
             user_id = request.user.id
@@ -230,12 +234,15 @@ class DashBoardAPIView(APIView):
                 calculating expected weight
                 """
                 initial_weight = user_details.ini_weight
-                print(initial_weight)
                 calorie_factor = 0.00012
                 expected_weight = initial_weight - (total_calories_burn * calorie_factor)
 
+                today_exercise = ExerciseHistory.objects.filter(date=datetime.today().date())
+                exercise_history_serializer = ExerciseHistorySerializer(today_exercise, many=True)
+
                 message = {
                     "raise_modal": False,
+                    "today_exercises": exercise_history_serializer.data,
                     "exercise_history": exercises_history,
                     "calories_date_data": calories_date_data,
                     "total_calories_burn": total_calories_burn,
@@ -246,4 +253,25 @@ class DashBoardAPIView(APIView):
             return success_response(data=message, status=status.HTTP_200_OK)
         except Exception as ex:
             raise ex
+
+
+class ExerciseHistoryAPIView(APIView):
+
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+
+            user_id = request.user.id
+            exercise = ExerciseHistory.objects.get(id=request.data["exercise_id"])
+            exercise.done = True
+            exercise.save()
+
+            return success_response(data="exercise status updated", status=status.HTTP_200_OK)
+
+        except Exception as ex:
+            raise ex
+
+
 
