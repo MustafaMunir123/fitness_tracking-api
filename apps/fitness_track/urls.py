@@ -4,7 +4,8 @@ from apps.fitness_track.views import (
     UserDetailAPIView,
     ExerciseAPIView,
     UserExerciseAPIView,
-    UserGoals
+    UserGoals,
+    DashBoardAPIView
 )
 
 urlpatterns = [
@@ -12,5 +13,6 @@ urlpatterns = [
     path('user-details/', UserDetailAPIView.as_view()),
     path('exercises/', ExerciseAPIView.as_view()),
     path('my-exercises/', UserExerciseAPIView.as_view()),
-    path('goals/', UserGoals.as_view())
+    path('goals/', UserGoals.as_view()),
+    path('dashboard/', DashBoardAPIView.as_view())
 ]

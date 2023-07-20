@@ -31,7 +31,7 @@
         "reps": 15
     }
 ],
-    "muscle_building_exercises": [
+    "MUSCLE_BUILDING": [
     {
         "name": "Squats",
         "burn_calories": 200,
@@ -63,7 +63,7 @@
         "reps": 15
     }
 ],
-    "cardio_exercises": [
+    "CARDIO": [
     {
         "name": "Running",
         "burn_calories": 500,
@@ -95,7 +95,7 @@
         "reps": 15
     }
 ],
-    "flexibility_exercises": [
+    "FLEXIBILITY": [
     {
         "name": "Yoga",
         "burn_calories": 150,
